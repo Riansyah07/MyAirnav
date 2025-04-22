@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-3">
                 <label for="category" class="form-label">Kategori</label>
-                <select id="category" name="category" class="form-select">
+                <select id="category" name="category" class="form-control">
                     <option value="">-- Semua Kategori --</option>
                     @foreach(['Pengantar', 'BAB 1', 'BAB 2', 'BAB 3', 'BAB 4', 'BAB 5', 'BAB 6', 'BAB 7', 'BAB 8', 'BAB 9', 'BAB 10', 'BAB 11', 'BAB 12', 'Penutup', 'Lampiran'] as $cat)
                         <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-2">
                 <label for="sort" class="form-label">Urutkan</label>
-                <select id="sort" name="sort" class="form-select">
+                <select id="sort" name="sort" class="form-control">
                     <option value="">-- Urutkan --</option>
                     <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>A-Z</option>
                     <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Z-A</option>

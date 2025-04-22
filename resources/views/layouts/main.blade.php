@@ -21,7 +21,7 @@
 
   gtag('config', 'UA-94034622-3');
 </script>
-<!-- /END GA --></head>
+</head>
 
 <body>
   <div id="app">
@@ -58,11 +58,6 @@
 <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
 <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
 <script src="{{ asset('assets/js/stisla.js') }}"></script>
-
-<!-- JS Libraries -->
-{{-- Tambahkan jika ada JS tambahan dari halaman spesifik --}}
-
-<!-- Page Specific JS File -->
 
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
