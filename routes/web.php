@@ -9,6 +9,8 @@ use App\Http\Controllers\Superadmin\UserManagementController;
 use App\Http\Controllers\Superadmin\DocumentController as SuperadminDocumentController;
 use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
 use App\Http\Controllers\User\DocumentController as UserDocumentController;
+use App\Http\Controllers\Superadmin\CertificateController;
+use App\Models\Certificate;
 
 // Redirect root ke login
 Route::get('/', fn () => redirect('/login'));
@@ -36,9 +38,21 @@ Route::post('/notifications/read/{id}', function ($id) {
 })->name('notifications.markAsRead');
 
 
+Route::prefix('superadmin')->middleware(['auth', 'role:superadmin'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Superadmin\DashboardController::class, 'index'])->name('superadmin.dashboard');
+});
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+});
+Route::prefix('user')->middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard');
+});
+
+
 // ===================== RUTE SUPERADMIN ===================== //
 Route::middleware(['auth', 'role:superadmin'])->prefix('superadmin')->name('superadmin.')->group(function () {
-    Route::get('/dashboard', fn () => view('superadmin.dashboard'))->name('dashboard');
+    // Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\Superadmin\DashboardController::class, 'index'])->name('dashboard');
 
     // Notifikasi Superadmin
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
@@ -52,11 +66,25 @@ Route::middleware(['auth', 'role:superadmin'])->prefix('superadmin')->name('supe
     Route::post('/documents/bulk-delete', [SuperadminDocumentController::class, 'bulkDelete'])->name('documents.bulkDelete');
     Route::get('/documents/{category}', [SuperadminDocumentController::class, 'showCategory'])->whereIn('category', ['teknik', 'operasi', 'k3'])->name('documents.category');
     Route::resource('documents', SuperadminDocumentController::class);
+
+    // Sertifikat
+    Route::prefix('sertifikat')->name('sertifikat.')->group(function () {
+        Route::get('/', [CertificateController::class, 'index'])->name('index');
+        Route::get('/create', [CertificateController::class, 'create'])->name('create');
+        Route::post('/', [CertificateController::class, 'store'])->name('store');
+        Route::get('/{id}', [CertificateController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [CertificateController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [CertificateController::class, 'update'])->name('update');
+        Route::delete('/superadmin/sertifikat/{id}', [CertificateController::class, 'destroy'])->name('superadmin.sertifikat.destroy');
+        Route::post('/bulk-download', [CertificateController::class, 'bulkDownload'])->name('bulkDownload');
+        Route::post('/bulk-delete', [CertificateController::class, 'bulkDelete'])->name('bulkDelete');
+    });
 });
+
 
 // ===================== RUTE ADMIN ===================== //
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
+    // Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
 
     // Notifikasi Admin
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
@@ -71,7 +99,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 // ===================== RUTE USER ===================== //
 Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
-    Route::get('/dashboard', fn () => view('user.dashboard'))->name('dashboard');
+    // Route::get('/dashboard', fn () => view('user.dashboard'))->name('dashboard');
 
     // Notifikasi User
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
@@ -81,5 +109,8 @@ Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(f
     Route::get('/documents/{category}', [UserDocumentController::class, 'showCategory'])->whereIn('category', ['teknik', 'operasi', 'k3'])->name('documents.category');
     Route::resource('documents', UserDocumentController::class);
 });
+
+
+
 
 require __DIR__ . '/auth.php';
