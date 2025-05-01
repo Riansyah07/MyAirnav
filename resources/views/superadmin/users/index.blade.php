@@ -52,7 +52,7 @@
         <tbody>
             @forelse($users as $key => $user)
                 <tr>
-                    <td>{{ $users->firstItem() + $key }}</td> <!-- Gunakan firstItem() karena sudah pakai paginate -->
+                    <td>{{ $users->firstItem() + $key }}</td> 
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ ucfirst($user->role) }}</td>

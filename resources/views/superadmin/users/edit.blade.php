@@ -23,6 +23,15 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" required>
         </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+                <input type="password" name="password" id="password" class="form-control" value="{{ $user->password }}" required>
+                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
+                    👁️
+                </button>
+            </div>
+        </div>
 
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
@@ -33,7 +42,15 @@
         </div>
 
         <a href="{{route('superadmin.users.index')}}" class="btn btn-warning">Kembali</a>
-        <button type="submit" class="btn btn-warning">Update User</button>
+        <button type="submit" class="btn btn-success">Update User</button>
     </form>
 </div>
+@push('scripts')
+<script>
+    function togglePassword() {
+        const input = document.getElementById("password");
+        input.type = input.type === "password" ? "text" : "password";
+    }
+</script>
+@endpush
 @endsection

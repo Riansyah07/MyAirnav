@@ -33,23 +33,38 @@
                     {{-- Tambahan 2 Card --}}
                     <div class="row mt-4 w-100 px-5">
                         <div class="col-md-6">
-                            <div class="card text-white bg-primary shadow-sm">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title">Jumlah Pengguna</h6>
-                                    <h3 class="fw-bold">{{ $totalUsers }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="card text-white bg-success shadow-sm">
                                 <div class="card-body text-center">
-                                    <h6 class="card-title">Jumlah Dokumen</h6>
+                                    <h6 class="card-title">Jumlah Dokumen Manual Operasi</h6>
                                     <h3 class="fw-bold">{{ $totalDocuments }}</h3>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="card text-white bg-info shadow-sm">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title">Jumlah Sertifikat</h6>
+                                    <h3 class="fw-bold">{{ $totalCertificates }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <div class="card text-white bg-warning shadow-sm">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title">Jumlah Dokumen Loca</h6>
+                                    <h3 class="fw-bold">{{ $totalLoca }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <div class="card text-white bg-success shadow-sm">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title">Jumlah Dokumen ISR</h6>
+                                    <h3 class="fw-bold">{{ $totalIsr }}</h3>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
                 </div>
             </div>
         </div>

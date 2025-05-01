@@ -22,7 +22,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('superadmin.sertifikat.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.sertifikat.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Judul Sertifikat</label>
@@ -31,12 +31,12 @@
 
 
                 <div class="form-group">
-                    <label for="file">Upload Sertifikat (PDF/docx)</label>
+                    <label for="file">Upload Sertifikat (PDF/JPG/PNG)</label>
                     <input type="file" name="file" class="form-control-file" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('superadmin.sertifikat.index') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ route('admin.sertifikat.index') }}" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </div>

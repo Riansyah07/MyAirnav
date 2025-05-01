@@ -10,18 +10,25 @@
                 $documentsMainRoute = route('superadmin.documents.index');
                 $documentsRoutePrefix = 'superadmin.documents.category';
                 $certificateRoute = route('superadmin.sertifikat.index');
+                $locaRoute = route('superadmin.loca.index');
+                $isrRoute = route('superadmin.isr.index');
+                
                 break;
             case 'admin':
                 $dashboardRoute = route('admin.dashboard');
                 $documentsMainRoute = route('admin.documents.index');
                 $documentsRoutePrefix = 'admin.documents.category';
                 $certificateRoute = route('admin.sertifikat.index');
+                $locaRoute = route('admin.loca.index');
+                $isrRoute = route('admin.isr.index');
                 break;
             default:
                 $dashboardRoute = route('user.dashboard');
                 $documentsMainRoute = route('user.documents.index');
                 $documentsRoutePrefix = 'user.documents.category';
                 $certificateRoute = route('user.sertifikat.index');
+                $locaRoute = route('user.loca.index');
+                $isrRoute = route('user.isr.index');
                 break;
         }
     @endphp
@@ -54,8 +61,8 @@
             </li>
 
             <li><a href="{{ $certificateRoute }}"><i class="fas fa-certificate"></i> <span>Sertifikat</span></a></li>
-            <li><a href="{{ $dashboardRoute }}"><i class="fas fa-bookmark"></i> <span>LOCA</span></a></li>
-            <li><a href="{{ $dashboardRoute }}"><i class="fas fa-chart-line"></i> <span>ISR</span></a></li>
+            <li><a href="{{ $locaRoute }}"><i class="fas fa-bookmark"></i> <span>LOCA</span></a></li>
+            <li><a href="{{ $isrRoute }}"><i class="fas fa-chart-line"></i> <span>ISR</span></a></li>
 
             @auth
                 @if($user->role === 'superadmin')

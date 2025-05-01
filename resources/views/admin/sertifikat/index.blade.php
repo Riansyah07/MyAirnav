@@ -6,7 +6,7 @@
 <div class="container bg-white p-4 rounded shadow-sm">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4>Daftar Sertifikat</h4>
-        <a href="{{ route('superadmin.sertifikat.create') }}" class="btn btn-primary">+ Tambah Sertifikat</a>
+        <a href="{{ route('admin.sertifikat.create') }}" class="btn btn-primary">+ Tambah Sertifikat</a>
     </div>
 
     {{-- Filter dan Pencarian --}}
@@ -53,11 +53,11 @@
                             <td>{{ $item->created_at->format('d M Y') }}</td>
                             <td>{{ $item->user ? $item->user->name : 'Unknown' }}</td>
                             <td>
-                                <a href="{{ route('superadmin.sertifikat.show', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
-                                <a href="{{ route('superadmin.sertifikat.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="{{ route('admin.sertifikat.show', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                                <a href="{{ route('admin.sertifikat.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
                                 {{-- Form Hapus --}}
-                                <form action="{{ route('superadmin.sertifikat.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus sertifikat ini?')">
+                                <form action="{{ route('admin.sertifikat.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus sertifikat ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

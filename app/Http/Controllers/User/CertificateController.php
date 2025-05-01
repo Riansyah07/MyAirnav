@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Superadmin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
@@ -36,12 +36,12 @@ class CertificateController extends Controller
 
         $sertifikat = $query->paginate(10)->withQueryString();
 
-        return view('superadmin.sertifikat.index', compact('sertifikat', 'search', 'date', 'sort'));
+        return view('user.sertifikat.index', compact('sertifikat', 'search', 'date', 'sort'));
     }
 
     public function create()
     {
-        return view('superadmin.sertifikat.create');
+        return view('user.sertifikat.create');
     }
 
     public function store(Request $request)
@@ -64,13 +64,13 @@ class CertificateController extends Controller
 
         Auth::user()->notify(new DocumentActionNotification('Sertifikat "' . $certificate->title . '" berhasil diupload.'));
 
-        return redirect()->route('superadmin.sertifikat.index')->with('success', 'Sertifikat berhasil diupload.');
+        return redirect()->route('user.sertifikat.index')->with('success', 'Sertifikat berhasil diupload.');
     }
 
     public function edit($id)
     {
         $sertifikat = Certificate::findOrFail($id);
-        return view('superadmin.sertifikat.edit', compact('sertifikat'));
+        return view('user.sertifikat.edit', compact('sertifikat'));
     }
 
     public function update(Request $request, $id)
@@ -101,14 +101,14 @@ class CertificateController extends Controller
 
         Auth::user()->notify(new DocumentActionNotification('Sertifikat "' . $sertifikat->title . '" berhasil diperbarui.'));
 
-        return redirect()->route('superadmin.sertifikat.index')->with('success', 'Sertifikat berhasil diperbarui.');
+        return redirect()->route('user.sertifikat.index')->with('success', 'Sertifikat berhasil diperbarui.');
     }
 
     public function show($id)
     {
         $sertifikat = Certificate::findOrFail($id);
         $fileUrl = Storage::url($sertifikat->file_path);
-        return view('superadmin.sertifikat.show', compact('sertifikat', 'fileUrl'));
+        return view('user.sertifikat.show', compact('sertifikat', 'fileUrl'));
     }
 
     public function destroy($id)
@@ -128,7 +128,7 @@ class CertificateController extends Controller
                 return response()->json(['success' => 'Sertifikat berhasil dihapus.']);
             }
 
-            return redirect()->route('superadmin.sertifikat.index')->with('success', 'Sertifikat berhasil dihapus.');
+            return redirect()->route('user.sertifikat.index')->with('success', 'Sertifikat berhasil dihapus.');
         } catch (\Exception $e) {
             report($e);
             return redirect()->back()->with('error', 'Gagal menghapus sertifikat. Coba lagi nanti.');

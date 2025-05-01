@@ -71,28 +71,36 @@ class UserManagementController extends Controller
     }
 
     public function update(Request $request, User $user)
-    {
-        if ($user->role === 'superadmin') {
-            return redirect()->route('superadmin.users.index')->with('error', 'Tidak bisa mengedit Superadmin.');
-        }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'role' => 'required|in:admin,user',
-        ]);
-
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-        ]);
-
-        // Notifikasi
-        Auth::user()->notify(new DocumentActionNotification('User "' . $user->name . '" berhasil diperbarui.'));
-
-        return redirect()->route('superadmin.users.index')->with('success', 'User berhasil diperbarui.');
+{
+    if ($user->role === 'superadmin') {
+        return redirect()->route('superadmin.users.index')->with('error', 'Tidak bisa mengedit Superadmin.');
     }
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        'password' => 'nullable|string|min:6|confirmed',
+        'role' => 'required|in:admin,user',
+        
+    ]);
+
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'role' => $request->role,
+    ];
+
+    if ($request->filled('password')) {
+        $data['password'] = Hash::make($request->password);
+    }
+
+    $user->update($data);
+
+    Auth::user()->notify(new DocumentActionNotification('User "' . $user->name . '" berhasil diperbarui.'));
+
+    return redirect()->route('superadmin.users.index')->with('success', 'User berhasil diperbarui.');
+}
+
 
     public function destroy(User $user)
     {

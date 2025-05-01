@@ -5,15 +5,21 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Document;
+use App\Models\Certificate;
+use App\Models\Loca;
+use App\Models\Isr;
 
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $totalUsers = User::count();
-        $totalDocuments = Document::count();
+{
+    $totalDocuments = Document::count();
+    $totalCertificates = Certificate::count();
+    $totalLoca = Loca::count();
+    $totalIsr = Isr::count();
+    
 
-        return view('user.dashboard', compact('totalUsers', 'totalDocuments'));
-    }
+    return view('user.dashboard', compact('totalDocuments', 'totalCertificates', 'totalLoca', 'totalIsr'));
+}
 }
 

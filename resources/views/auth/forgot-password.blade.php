@@ -55,12 +55,13 @@
                     </button>
                   </div>
                 </form>
+                <div class="simple-footer text-center">
+                  <a href="{{ route('login') }}">← Kembali ke Login</a>
+                </div> 
               </div>
             </div>
 
-            <div class="simple-footer text-center">
-              <a href="{{ route('login') }}">← Kembali ke Login</a>
-            </div>
+            
 
           </div>
         </div>

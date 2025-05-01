@@ -1,12 +1,11 @@
 @extends('layouts.main')
 
-@section('title', 'Daftar Sertifikat')
+@section('title', 'Izin Stasiun Radio')
 
 @section('content')
 <div class="container bg-white p-4 rounded shadow-sm">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4>Daftar Sertifikat</h4>
-        <a href="{{ route('superadmin.sertifikat.create') }}" class="btn btn-primary">+ Tambah Sertifikat</a>
+        <h4>Izin Stasiun Radio</h4>
     </div>
 
     {{-- Filter dan Pencarian --}}
@@ -38,35 +37,27 @@
             <table class="table table-bordered align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th>Judul</th>
-                        <th>Tipe</th>
+                        <th>Nama Dokumen</th>
+                        <th>Tipe Dokumen</th>
                         <th>Tanggal Upload</th>
                         <th>Diunggah Oleh</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($sertifikat as $item)
+                    @forelse($isrs as $item)
                         <tr id="row-{{ $item->id }}">
-                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->name }}</td>
                             <td>{{ strtoupper($item->file_type) }}</td>
                             <td>{{ $item->created_at->format('d M Y') }}</td>
                             <td>{{ $item->user ? $item->user->name : 'Unknown' }}</td>
                             <td>
-                                <a href="{{ route('superadmin.sertifikat.show', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
-                                <a href="{{ route('superadmin.sertifikat.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-
-                                {{-- Form Hapus --}}
-                                <form action="{{ route('superadmin.sertifikat.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus sertifikat ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                </form>
+                                <a href="{{ route('user.isr.show', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada sertifikat ditemukan.</td>
+                            <td colspan="6" class="text-center">Tidak ada dokumen ditemukan.</td>
                         </tr>
                     @endforelse
                 </tbody>

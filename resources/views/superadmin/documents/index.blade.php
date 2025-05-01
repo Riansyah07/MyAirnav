@@ -43,7 +43,7 @@
                 </select>
             </div>
             <div class="col-md-1">
-                <button type="submit" class="btn btn-primary w-100">
+                <button type="submit" class="btn btn-primary w-100 h-100">
                     <i class="fas fa-search"></i> Cari
                 </button>
             </div>
